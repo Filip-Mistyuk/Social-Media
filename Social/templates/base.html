@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal group</title>
+  <title>{% block title %}Portal group{% endblock %}</title>
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 </head>
@@ -14,6 +14,7 @@
         <li><a href="{% url 'main:home' %}">Home</a></li>
         {% if user.is_authenticated %}
             <li><a href="{% url 'auth_sys:logout' %}">Logout</a></li>
+            <li><a href="{% url 'post:create_post' %}">Create Post</a></li>
         {% else %}
           <li><a href="{% url 'auth_sys:login' %}">Sign in</a></li>
           <li><a href="{% url 'auth_sys:signup' %}">Sign Up</a></li>
@@ -25,9 +26,6 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer>
-    <p>&copy; 2024 Social Media</p>
-  </footer>
   <script src="{% static 'js/main.js' %}" defer></script>
 </body>
 </html>

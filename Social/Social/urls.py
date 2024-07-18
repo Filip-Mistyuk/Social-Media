@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('auth_sys/', include('auth_sys.urls')),
+    path('post/', include('Post.urls')),
 ]
 
 urlpatterns += static(
