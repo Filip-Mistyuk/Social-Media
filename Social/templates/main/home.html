@@ -3,10 +3,21 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% for post in posts %}
-  <div class="post">
-    <p><strong>{{ post.author.username }}</strong> at {{ post.created_at }}</p>
-    <p>{{ post.content }}</p>
-  </div>
-{% endfor %}
+  {% for post in posts %}
+    <div class="post">
+      {% if post.photo %}
+        <img src="{{ post.photo.url }}" alt="Post photo">
+      {% endif %}
+      <div class="post-content">
+        <p class="post-author">{{ post.author.username }}</p>
+        <p class="post-timestamp">{{ post.created_at|date:"F j, Y, g:i a" }}</p>
+        <p class="post-text">{{ post.content }}</p>
+      </div>
+      <div class="post-actions">
+        <button>Like</button>
+        <button>Comment</button>
+        <button>Share</button>
+      </div>
+    </div>
+  {% endfor %}
 {% endblock %}

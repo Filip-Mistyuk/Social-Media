@@ -13,8 +13,8 @@
       <ul>
         <li><a href="{% url 'main:home' %}">Home</a></li>
         {% if user.is_authenticated %}
-            <li><a href="{% url 'auth_sys:logout' %}">Logout</a></li>
-            <li><a href="{% url 'post:create_post' %}">Create Post</a></li>
+          <li><a href="{% url 'auth_sys:logout' %}">Logout</a></li>
+          <li><a href="{% url 'post:create_post' %}">Create Post</a></li>
         {% else %}
           <li><a href="{% url 'auth_sys:login' %}">Sign in</a></li>
           <li><a href="{% url 'auth_sys:signup' %}">Sign Up</a></li>
@@ -26,6 +26,9 @@
     {% block content %}
     {% endblock %}
   </main>
+  <footer>
+    <p>&copy; 2024 Portal Group</p>
+  </footer>
   <script src="{% static 'js/main.js' %}" defer></script>
 </body>
 </html>
