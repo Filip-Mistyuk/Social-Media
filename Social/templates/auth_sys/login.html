@@ -1,15 +1,24 @@
-{% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% translate "Sign in" %}{% endblock %}
-
-{% block content %}
-  <form method="post" class="auth-form">
-    {% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% translate "Sign in" %}{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/signin.css' %}">
+</head>
+<body>
+  <div class="auth-container">
+    <form method="post" class="auth-form">
+      {% csrf_token %}
       <div class="title">{% translate "Sign in" %}</div>
       <label for="username">{% translate "Username" %}</label>
       {{ form.username }}
       <label for="password">{% translate "Password" %}</label>
       {{ form.password }}
       <button type="submit" class="auth-form-btn">{% translate "Sign in" %}</button>
-  </form>
-{% endblock %}
+    </form>
+  </div>
+</body>
+</html>

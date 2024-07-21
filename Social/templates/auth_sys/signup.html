@@ -1,20 +1,28 @@
-{% extends "base.html" %}
-{% load i18n %}
-
-{% block title %}{% translate "Sign up" %}{% endblock %}
-
-{% block content %}
-  <form method="post" class="auth-form">
-    {% csrf_token %}
-    <div class="title">{% translate "Sign up" %}</div>
-        <label for="username">{% translate "Username" %}</label>
-        {{ form.username }}
-        <label for="email">{% translate "Email" %}</label>
-        {{ form.email }}
-        <label for="password1">{% translate "Password 1" %}</label>
-        {{ form.password1 }}
-        <label for="password2">{% translate "Password 2" %}</label>
-        {{ form.password2 }}
-    <button type="submit" class="auth-form-btn" href="{% url 'auth_sys:login' %}">{% translate "Sign up" %}</button>
-  </form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+  <div class="auth-container">
+    <form method="post" class="auth-form">
+      {% csrf_token %}
+      <div class="title">Sign up</div>
+      <label for="username">Username</label>
+      {{ form.username }}
+      <label for="email">Email</label>
+      {{ form.email }}
+      <label for="password1">Password 1</label>
+      {{ form.password1 }}
+      <label for="password2">Password 2</label>
+      {{ form.password2 }}
+      <button type="submit" class="auth-form-btn">Sign up</button>
+      <a href="{% url 'auth_sys:login' %}">Already have an account? Sign in</a>
+    </form>
+  </div>
+</body>
+</html>
