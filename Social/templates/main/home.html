@@ -5,12 +5,18 @@
 {% block content %}
   {% for post in posts %}
     <div class="post">
+      <div class="post-header">
+        {% if post.author.profile_picture %}
+          <img src="{{ post.author.profile_picture.url }}" alt="Author's profile picture">
+        {% endif %}
+        <div class="post-author">{{ post.author.username }}</div>
+        <div class="post-timestamp">{{ post.created_at|date:"F j, Y, g:i a" }}</div>
+        <div class="post-timestamp">2 hours ago</div>
+      </div>
       {% if post.photo %}
         <img src="{{ post.photo.url }}" alt="Post photo">
       {% endif %}
       <div class="post-content">
-        <p class="post-author">{{ post.author.username }}</p>
-        <p class="post-timestamp">{{ post.created_at|date:"F j, Y, g:i a" }}</p>
         <p class="post-text">{{ post.content }}</p>
       </div>
       <div class="post-actions">

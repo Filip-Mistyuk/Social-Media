@@ -3,6 +3,9 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 header {
@@ -35,6 +38,7 @@ nav ul li a:hover {
 }
 
 main {
+  flex: 1;
   padding: 20px;
   max-width: 800px;
   margin: 20px auto;
@@ -48,9 +52,7 @@ footer {
   color: #333;
   text-align: center;
   padding: 10px 0;
-  position: fixed;
   width: 100%;
-  bottom: 0;
 }
 
 .post {

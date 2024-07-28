@@ -1,10 +1,9 @@
-{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{% translate "Sign in" %}{% endblock %}</title>
+  <title>{% block title %}Sign in{% endblock %}</title>
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/signin.css' %}">
 </head>
@@ -12,12 +11,14 @@
   <div class="auth-container">
     <form method="post" class="auth-form">
       {% csrf_token %}
-      <div class="title">{% translate "Sign in" %}</div>
-      <label for="username">{% translate "Username" %}</label>
+      <div class="title">Sign in</div>
+      <label for="username">Username</label>
       {{ form.username }}
-      <label for="password">{% translate "Password" %}</label>
+      <label for="password">Password</label>
       {{ form.password }}
-      <button type="submit" class="auth-form-btn">{% translate "Sign in" %}</button>
+      <button type="submit" class="auth-form-btn">Sign in</button>
+      <a href="{% url 'main:home' %}" class="home-btn">Home</a>
+      <a href="{% url 'auth_sys:signup' %}">Don't have an account? Sign up</a>
     </form>
   </div>
 </body>
