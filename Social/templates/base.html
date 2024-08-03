@@ -6,6 +6,7 @@
   <title>{% block title %}Portal group{% endblock %}</title>
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+  <meta name="csrf-token" content="{{ csrf_token }}">
 </head>
 <body>
   <header>

@@ -1,3 +1,4 @@
+/* Общие стили */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -55,6 +56,7 @@ footer {
   width: 100%;
 }
 
+/* Посты */
 .post {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -113,14 +115,220 @@ footer {
   border-top: 1px solid #ddd;
 }
 
-.post-actions button {
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  font-size: 1em;
+/* Кнопка Лайка */
+.like-form {
+  display: flex;
+  align-items: center;
 }
 
-.post-actions button:hover {
-  text-decoration: underline;
+.Btn {
+  width: 140px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.089);
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.leftContainer {
+  width: 60%;
+  height: 100%;
+  background-color: rgb(238, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.leftContainer .like {
+  color: white;
+  font-weight: 600;
+}
+
+.likeCount {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(238, 0, 0);
+  font-weight: 600;
+  position: relative;
+  background-color: white;
+}
+
+.likeCount::before {
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  content: "";
+  background-color: rgb(255, 255, 255);
+  transform: rotate(45deg);
+  left: -4px;
+}
+
+.Btn:hover .leftContainer {
+  background-color: rgb(219, 0, 0);
+}
+
+.Btn:active .leftContainer {
+  background-color: rgb(201, 0, 0);
+}
+
+.Btn:active .leftContainer svg {
+  transform: scale(1.15);
+  transform-origin: top;
+}
+
+/* Модальное Окно Комментариев */
+.comment-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.comment-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.comment-avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.comment-text {
+  flex: 1;
+}
+
+.comment-form {
+  margin-top: 15px;
+}
+
+.comment-form button {
+  background-color: rgb(238, 0, 0);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.comment-form button:hover {
+  background-color: rgb(219, 0, 0);
+}
+
+.comment-form button:active {
+  background-color: rgb(201, 0, 0);
+}
+
+.comment-form input,
+.comment-form textarea {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.comment-form textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+/* Кнопка Комментариев */
+.commentBtn {
+  width: 130px;
+  height: 40px;
+  border-radius: 40px;
+  border: none;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.commentBtn:hover {
+  background-color: #5e35b1;
+}
+
+.IconContainer {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #5e35b1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.text {
+  height: 100%;
+  width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: transform 0.3s ease, width 0.3s ease, font-size 0.3s ease;
+  font-size: 1.04em;
+  font-weight: 600;
+}
+
+.commentBtn:hover .text {
+  transform: translateX(10px);
+  width: 0;
+  font-size: 0;
+}
+
+.commentBtn:active {
+  transform: scale(0.95); /* Эффект сжатия при нажатии */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* Внутреннее тень при нажатии */
 }
