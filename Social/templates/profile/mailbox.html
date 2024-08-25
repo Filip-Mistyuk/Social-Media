@@ -1,0 +1,29 @@
+<h2>Incoming Requests</h2>
+<ul>
+    {% for request in received_requests %}
+    <li>
+        {{ request.from_user.username }}
+        <form method="post" action="{% url 'profile:accept_follow_request' follow_request_id=request.id %}">
+            {% csrf_token %}
+            <button type="submit">Accept</button>
+        </form>
+        <form method="post" action="{% url 'profile:reject_follow_request' request.id %}">
+            {% csrf_token %}
+            <button type="submit">Reject</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Sent Requests</h2>
+<ul>
+    {% for request in sent_requests %}
+    <li>
+        {{ request.to_user.username }}
+        <form method="post" action="{% url 'profile:cancel_follow_request' request.id %}">
+            {% csrf_token %}
+            <button type="submit">Cancel</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>

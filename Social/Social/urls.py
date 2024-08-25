@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('auth_sys/', include('auth_sys.urls')),
-    path('post/', include('Post.urls')),
+    path('posts/', include('Post.urls')),
+    path('profiles/', include('profiles.urls')),
 ]
 
 urlpatterns += static(

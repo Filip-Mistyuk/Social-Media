@@ -1,0 +1,8 @@
+<h2>Followers</h2>
+<ul>
+    {% for user in followers %}
+        <li>{{ user.user.username }}</li>
+    {% empty %}
+        <li>No followers</li>
+    {% endfor %}
+</ul>

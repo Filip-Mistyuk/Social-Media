@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import PostForm, CommentForm
 from django.views import View
@@ -19,11 +20,9 @@ class PostLikeToggle(View):
         
         return redirect(request.META.get('HTTP_REFERER', 'home'))
     
-@login_required
 def post_list(request):
-    posts = Post.objects.all()
-    form = CommentForm()
-    return render(request, 'main/home.html', {'posts': posts, 'form': form})
+    posts = Post.objects.all().order_by('-created_at')
+    return render(request, 'post/post_list.html', {'posts': posts})
 
 @login_required
 def post_comment(request, pk):
@@ -35,6 +34,9 @@ def post_comment(request, pk):
             comment.post = post
             comment.user = request.user
             comment.save()
+            return redirect(reverse('post:post_list'))
+    else:
+        form = CommentForm()
     return redirect('post:post_list')
 
 @login_required

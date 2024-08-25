@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h2>Search Users</h2>
+    <form method="get">
+      {{ form.as_p }}
+      <button type="submit">Search</button>
+    </form>
+    <ul>
+      {% for user in results %}
+        <li>
+          {{ user.username }}
+          <form action="{% url 'profile:send_follow_request' user.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Follow</button>
+          </form>
+        </li>
+      {% empty %}
+        <li>No users found.</li>
+      {% endfor %}
+    </ul>
+</body>
+</html>

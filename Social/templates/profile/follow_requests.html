@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Follow Requests</h2>
+  <h3>Received Requests</h3>
+  <ul>
+    {% for request in received_requests %}
+      <li>
+        {{ request.sender.username }}
+        <form action="{% url 'profile:accept_follow_request' request.id %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">Accept</button>
+        </form>
+        <form action="{% url 'profile:reject_follow_request' request.id %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">Reject</button>
+        </form>
+      </li>
+    {% empty %}
+      <li>No follow requests.</li>
+    {% endfor %}
+  </ul>
+  <h3>Sent Requests</h3>
+  <ul>
+    {% for request in sent_requests %}
+      <li>
+        {{ request.receiver.username }}
+        {% if not request.accepted %}
+          (Pending)
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No sent requests.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

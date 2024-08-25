@@ -12,12 +12,14 @@
   <header>
     <nav>
       <ul>
-        <li><a href="{% url 'main:home' %}">Home</a></li>
-        <li><a href="#">Profile</a></li>
+        <li><a href="{% url 'main:home' %}">Profile</a></li>
+        <li><a href="{% url 'profile:search_users' %}"><img src="{% static 'img/search.png' %}" style="width: 25px; height: 25px;" alt="qwrqwr"></a></li>
+        <li><a href="{% url 'profile:mailbox' %}">Mailbox</a></li>
         <li><a href="#">Messages</a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url 'auth_sys:logout' %}">Logout</a></li>
           <li><a href="{% url 'post:create_post' %}">Create Post</a></li>
+          <li><a href="{% url 'post:post_list' %}">View Posts</a></li>
         {% else %}
           <li><a href="{% url 'auth_sys:login' %}">Sign in</a></li>
           <li><a href="{% url 'auth_sys:signup' %}">Sign Up</a></li>

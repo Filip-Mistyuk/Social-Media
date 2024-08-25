@@ -1,0 +1,14 @@
+<h2>Subscriptions</h2>
+<ul>
+    {% for user in following %}
+        <li>
+            {{ user.user.username }}
+            <form action="{% url 'profile:unfollow_user' user.user.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Unfollow</button>
+            </form>
+        </li>
+    {% empty %}
+        <li>No subscriptions</li>
+    {% endfor %}
+</ul>
