@@ -9,6 +9,9 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.author.username}'s Post"
+    
+    def user_posts(self):
+        return Post.objects.filter(author=self.user)
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

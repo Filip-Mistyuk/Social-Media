@@ -3,13 +3,17 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm, UserSearchForm
 from .models import Profile, Follow, FollowRequest
 from django.contrib.auth.models import User
+from django.db import IntegrityError
+from django.contrib import messages
+from Post.models import Post
+
 
 @login_required
 def follow_user(request, user_id):
     user_to_follow = get_object_or_404(User, id=user_id)
     
     follow_request, created = FollowRequest.objects.get_or_create(
-        from_user=request.user, 
+        from_user=request.user,
         to_user=user_to_follow
     )
     
@@ -29,12 +33,14 @@ def profile(request, user_id=None):
     is_following = Follow.objects.filter(from_user=request.user, to_user=user).exists()
     followers = Follow.objects.filter(to_user=user)
     following = Follow.objects.filter(from_user=user)
+    posts = Post.objects.filter(author=user)
     
     context = {
         'user': user,
         'is_following': is_following,
         'followers': followers,
         'following': following,
+        'posts': posts,
     }
     return render(request, 'main/home.html', context)
 
@@ -82,8 +88,8 @@ def accept_follow_request(request, follow_request_id):
     if request.method == 'POST':
         follow_request.status = 'accepted'
         follow_request.save()
-        follow_request.from_user.profile.following.add(follow_request.to_user.profile)
         follow_request.to_user.profile.followers.add(follow_request.from_user.profile)
+        follow_request.from_user.profile.following.add(follow_request.to_user.profile)
         follow_request.delete()
 
         return redirect('profile:profile_with_id', user_id=follow_request.from_user.id)
@@ -110,7 +116,7 @@ def update_profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
-            return redirect('profile:profile_with_id', user_id=request.user.id)
+            return redirect('profile:profile')
     else:
         form = ProfileForm(instance=request.user.profile)
     
@@ -123,8 +129,12 @@ def create_profile(request):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
-            profile.save()
-            return redirect('profile:profile_with_id', user_id=request.user.id)
+            try:
+                profile.save()
+                messages.success(request, 'Profile created successfully.')
+                return redirect('profile:profile')
+            except IntegrityError:
+                messages.error(request, 'A profile for this user already exists.')
     else:
         form = ProfileForm()
 

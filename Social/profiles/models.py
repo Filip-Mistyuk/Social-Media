@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True)
     followers = models.ManyToManyField('self', symmetrical=False, related_name='following', blank=True)
